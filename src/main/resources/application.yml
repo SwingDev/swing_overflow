@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: default,slack
+    include: slack
 
   devtools:
     remote:
