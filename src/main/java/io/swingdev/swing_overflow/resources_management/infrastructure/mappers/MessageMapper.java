@@ -18,13 +18,13 @@ public class MessageMapper {
 
     public MessageMapper(ModelMapper modelMapper) {
         dtoToMessageMap = modelMapper.createTypeMap(MessageDTO.class, Message.class);
-        dtoToMessageMap.addMappings(mapping -> mapping.using(toDate).map(src -> src.ts, Message::changeDate));
+        dtoToMessageMap.addMappings(mapping -> mapping.using(toDate).map(MessageDTO::getTs, Message::changeDate));
 
         messageToDtoMap = modelMapper.createTypeMap(Message.class, MessageDTO.class);
         messageToDtoMap.addMappings(
             mapping -> mapping
                 .using(toTimestamp)
-                .map(Message::getDate, (destination, value) -> destination.ts = (String) value)
+                .map(Message::getDate, MessageDTO::setTs)
         );
     }
 
