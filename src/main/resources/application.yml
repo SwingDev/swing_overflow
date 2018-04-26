@@ -6,5 +6,10 @@ spring:
     remote:
       secret: secret-to-be-overridden
 
+  data:
+    neo4j:
+      username: ${NEO4J_USERNAME}
+      password: ${NEO4J_PASSWORD}
+
 rtmUrl: https://slack.com/api/rtm.start?token={token}&simple_latest&no_unreads
 slackBotToken: ${SLACK_BOT_TOKEN}
