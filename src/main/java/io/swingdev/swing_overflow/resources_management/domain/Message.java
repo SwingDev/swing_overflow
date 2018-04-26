@@ -14,7 +14,7 @@ public class Message {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void changeDate(Date date) {
         this.date = date;
     }
 }

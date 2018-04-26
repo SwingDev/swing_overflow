@@ -29,7 +29,7 @@ public class SlackBotService extends Bot {
 
     @Controller(events = {EventType.MESSAGE, EventType.DIRECT_MESSAGE}, pattern = "#resource")
     public void onReceiveResource(WebSocketSession session, Event event) {
-        System.out.print(event.getMessage().getText().toString());
+        System.out.print(event.getMessage().getText());
     }
 }
 

@@ -4,21 +4,27 @@ import com.google.common.collect.ImmutableMap;
 import io.swingdev.swing_overflow.resources_management.api.dto.HistoryDTO;
 import io.swingdev.swing_overflow.resources_management.domain.Message;
 import io.swingdev.swing_overflow.resources_management.domain.repositories.SlackRepository;
+import io.swingdev.swing_overflow.resources_management.infrastructure.mappers.MessageMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RESTSlackRepository implements SlackRepository {
-    public static String SLACK_URL = "https://slack.com";
+    private static String SLACK_URL = "https://slack.com";
 
     private RestTemplate restTemplate;
+    private MessageMapper messageMapper;
 
-    public RESTSlackRepository(@Value("${slackBotToken}") String slackToken) {
+    public RESTSlackRepository(@Value("${slackBotToken}") String slackToken, MessageMapper messageMapper) {
+        this.messageMapper = messageMapper;
+
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory(SLACK_URL);
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         restTemplateBuilder.uriTemplateHandler(defaultUriBuilderFactory);
@@ -35,7 +41,14 @@ public class RESTSlackRepository implements SlackRepository {
             ImmutableMap.of("channel", channelName)
         );
 
+        if (historyDTO == null) {
+            return new ArrayList<>();
+        }
 
-        return null;
+        return historyDTO
+                .messages
+                .stream()
+                .map(messageMapper::toMessage)
+                .collect(Collectors.toList());
     }
 }
