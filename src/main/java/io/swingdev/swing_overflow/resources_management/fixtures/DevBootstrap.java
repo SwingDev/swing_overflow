@@ -6,12 +6,14 @@ import io.swingdev.swing_overflow.resources_management.domain.Resource;
 import io.swingdev.swing_overflow.resources_management.domain.repositories.MessageRepository;
 import io.swingdev.swing_overflow.resources_management.domain.repositories.ResourceRepository;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
+@Profile("dev")
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private ResourceRepository resourceRepository;
     private MessageRepository messageRepository;
@@ -27,11 +29,14 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     private void initData() {
-        Message message1 = new Message("Hi, Jo!", new Date());
-        Message message2 = new Message("Hi, it's a #resource", new Date());
-        messageRepository.saveAll(ImmutableList.of(message1, message2));
+        if (messageRepository.count() > 0 || resourceRepository.count() > 0) {
+            Message message1 = new Message("Hi, Jo!", new Date());
+            Message message2 = new Message("Hi, it's a #resource", new Date());
+            messageRepository.saveAll(ImmutableList.of(message1, message2));
 
-        Resource resource1 = new Resource(message2);
-        resourceRepository.saveAll(ImmutableList.of(resource1));
+            Resource resource1 = new Resource(message2);
+            resourceRepository.saveAll(ImmutableList.of(resource1));
+        }
+
     }
 }
