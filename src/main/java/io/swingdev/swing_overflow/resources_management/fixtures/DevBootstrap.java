@@ -29,7 +29,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     private void initData() {
-        if (messageRepository.count() > 0 || resourceRepository.count() > 0) {
+        if (messageRepository.count() == 0 && resourceRepository.count() == 0) {
             Message message1 = new Message("Hi, Jo!", new Date());
             Message message2 = new Message("Hi, it's a #resource", new Date());
             messageRepository.saveAll(ImmutableList.of(message1, message2));
