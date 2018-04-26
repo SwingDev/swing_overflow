@@ -17,7 +17,6 @@ public class RESTSlackRepository implements SlackRepository {
     public static String SLACK_URL = "https://slack.com";
 
     private RestTemplate restTemplate;
-    private String slackToken;
 
     public RESTSlackRepository(@Value("${slackBotToken}") String slackToken) {
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory(SLACK_URL);
@@ -25,18 +24,15 @@ public class RESTSlackRepository implements SlackRepository {
         restTemplateBuilder.uriTemplateHandler(defaultUriBuilderFactory);
         restTemplateBuilder.rootUri("/api");
         restTemplate = restTemplateBuilder.build();
-        this.slackToken = slackToken;
+        restTemplate.setDefaultUriVariables(ImmutableMap.of("token", slackToken));
     }
 
     @Override
     public List<Message> getHistory(String channelName) {
-        HistoryDTO historyDTO= restTemplate.getForObject(
+        HistoryDTO historyDTO = restTemplate.getForObject(
             "/channels.history",
             HistoryDTO.class,
-            ImmutableMap.of(
-                "channel", channelName,
-                "token", slackToken
-            )
+            ImmutableMap.of("channel", channelName)
         );
 
 
