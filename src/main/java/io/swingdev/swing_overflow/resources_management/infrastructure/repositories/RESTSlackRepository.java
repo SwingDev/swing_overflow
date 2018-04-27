@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import io.swingdev.swing_overflow.resources_management.api.dto.HistoryDTO;
 import io.swingdev.swing_overflow.resources_management.domain.Message;
 import io.swingdev.swing_overflow.resources_management.domain.repositories.SlackRepository;
-import io.swingdev.swing_overflow.resources_management.infrastructure.mappers.MessageMapper;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 public class RESTSlackRepository implements SlackRepository {
 
     private RestTemplate restTemplate;
-    private MessageMapper messageMapper;
+    private Mapper mapper;
 
-    public RESTSlackRepository(@Value("${slackBotToken}") String slackToken, MessageMapper messageMapper) {
-        this.messageMapper = messageMapper;
+    public RESTSlackRepository(@Value("${slackBotToken}") String slackToken, Mapper mapper) {
+        this.mapper = mapper;
 
         String slackUrl = "https://slack.com";
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory(slackUrl);
@@ -48,7 +48,7 @@ public class RESTSlackRepository implements SlackRepository {
         return historyDTO
                 .getMessages()
                 .stream()
-                .map(messageMapper::toMessage)
+                .map(dto -> mapper.map(dto, Message.class))
                 .collect(Collectors.toList());
     }
 }
