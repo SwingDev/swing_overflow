@@ -16,6 +16,10 @@ public class Resource {
 
     private Resource () { }
 
+    public Message getMessage() {
+        return message;
+    }
+
     public Resource(Message message) {
         this.message = message;
     }
