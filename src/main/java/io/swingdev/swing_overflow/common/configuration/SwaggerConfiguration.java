@@ -1,4 +1,4 @@
-package io.swingdev.swing_overflow.resources_management.configuration;
+package io.swingdev.swing_overflow.common.configuration;
 
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +7,8 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.ApiKeyVehicle;
+import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
@@ -19,5 +21,10 @@ public class SwaggerConfiguration {
             .apis(RequestHandlerSelectors.any())
             .paths(Predicates.not(PathSelectors.regex("/error")))
             .build();
+    }
+
+    @Bean
+    public SecurityConfiguration security() {
+        return new SecurityConfiguration(null, null, null, null, "Bearer access_token", ApiKeyVehicle.HEADER, "Authorization", ",");
     }
 }
