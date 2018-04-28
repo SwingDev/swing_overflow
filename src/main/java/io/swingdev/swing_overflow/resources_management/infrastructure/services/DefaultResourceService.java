@@ -48,6 +48,7 @@ public class DefaultResourceService implements ResourceService {
         for (ResourceCreationStrategy resourceCreationStrategy : resourceCreationStrategies) {
             if (resourceCreationStrategy.condition(message)) {
                 resource = resourceCreationStrategy.produceResource(message);
+                break;
             }
         }
 

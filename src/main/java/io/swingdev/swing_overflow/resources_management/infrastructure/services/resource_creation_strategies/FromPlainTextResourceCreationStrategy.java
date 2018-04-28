@@ -2,7 +2,6 @@ package io.swingdev.swing_overflow.resources_management.infrastructure.services.
 
 import io.swingdev.swing_overflow.resources_management.domain.Message;
 import io.swingdev.swing_overflow.resources_management.domain.Resource;
-import io.swingdev.swing_overflow.resources_management.domain.Tag;
 import io.swingdev.swing_overflow.resources_management.domain.services.ResourceCreationStrategy;
 import io.swingdev.swing_overflow.resources_management.domain.services.ResourceService;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class FromPlainTextResourceCreationStrategy implements ResourceCreationSt
     public Resource produceResource(Message message) {
         String text = message.getText().replaceAll("#resource", "").trim();
 
-        return new Resource(message, new ArrayList<Tag>(), text, "to be implemented");
+        return new Resource(message, new ArrayList<>(), text, "to be implemented");
     }
 
     @Override
