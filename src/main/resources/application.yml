@@ -12,6 +12,9 @@ spring:
       password: ${NEO4J_PASSWORD}
       uri: bolt://neo4j
 
+server:
+  port: ${PORT}
+
 auth0:
   audience: swingoverflow.io
   issuer: https://dawiddominiak.eu.auth0.com/

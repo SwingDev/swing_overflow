@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    working_directory: /app
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk update
+            apk upgrade --no-cache
+            apk add --no-cache \
+              bash make
+      - run:
+          name: Build application Docker image
+          command: |
+            make build
+      - run:
+          name: Run tests
+          command: |
+            make test
+      - deploy:
+          name: Push application Docker image
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              make push_heroku
+            fi
