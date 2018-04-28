@@ -5,6 +5,7 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NodeEntity
@@ -20,7 +21,7 @@ public class Resource {
     private List<Tag> tags;
 
     @Relationship(type = "REACTED_WITH", direction = Relationship.INCOMING)
-    private List<Reaction> reactions;
+    private List<Reaction> reactions = new ArrayList<>();
 
     private String shortcut;
 
