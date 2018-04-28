@@ -14,15 +14,17 @@ public class User {
     @Index(unique = true)
     private String externalId;
 
+    //TODO remove name - name can be changed in Slack
     private String name;
 
     @Relationship(type = "REACTED_WITH", direction = Relationship.OUTGOING)
     private List<Reaction> reactions;
 
-    public User() {
+    private User() {
     }
 
-    public User(String name) {
+    public User(String externalId, String name) {
+        this.externalId = externalId;
         this.name = name;
     }
 

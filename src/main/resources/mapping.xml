@@ -38,7 +38,7 @@
         <class-a is-accessible="true">io.swingdev.swing_overflow.resources_management.domain.Reaction</class-a>
         <class-b>io.swingdev.swing_overflow.resources_management.api.dto.ReactionDTO</class-b>
         <field>
-            <a>user.name</a>
+            <a>user.externalId</a>
             <b>user</b>
         </field>
     </mapping>

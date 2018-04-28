@@ -32,4 +32,8 @@ public class Message {
     public void pinResource(Resource resource) {
         this.resource = resource;
     }
+
+    public Resource getResource() {
+        return resource;
+    }
 }

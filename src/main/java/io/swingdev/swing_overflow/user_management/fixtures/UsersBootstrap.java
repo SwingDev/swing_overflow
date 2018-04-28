@@ -34,9 +34,9 @@ public class UsersBootstrap implements ApplicationListener<ContextRefreshedEvent
 
     private void initData() {
         if (userRepository.count() == 0) {
-            User dawid = new User("dawiddominiak");
-            User tomek = new User("tomek");
-            User kasia = new User("kasia");
+            User dawid = new User("1", "dawiddominiak");
+            User tomek = new User("2", "tomek");
+            User kasia = new User("3","kasia");
             users = ImmutableList.of(dawid, tomek, kasia);
             userRepository.saveAll(users);
         }
