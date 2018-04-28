@@ -43,6 +43,10 @@ public class Resource {
         return reactions;
     }
 
+    public Long id() {
+        return this.id;
+    }
+
     public void addReaction(Reaction reaction) {
         reactions.add(reaction);
     }

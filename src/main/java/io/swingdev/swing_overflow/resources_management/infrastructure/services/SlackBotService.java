@@ -51,6 +51,8 @@ public class SlackBotService extends Bot {
         Resource resource = resourceService.createResourceByMessage(message);
 
         resourceService.save(resource);
+
+        reply(session, event, "Resource stored in database under ID " + resource.id());
     }
 }
 
