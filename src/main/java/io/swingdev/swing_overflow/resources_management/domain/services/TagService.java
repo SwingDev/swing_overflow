@@ -7,4 +7,5 @@ import java.util.List;
 public interface TagService {
     List<Tag> listAllTags();
     Tag findByName(String name);
+    List<Tag> findTagsByNames(List<String> names);
 }

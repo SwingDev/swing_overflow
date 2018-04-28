@@ -5,6 +5,7 @@ import io.swingdev.swing_overflow.resources_management.domain.services.ResourceS
 import org.dozer.Mapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,7 +23,9 @@ public class ResourceRestController {
     }
 
     @GetMapping
-    public List<ResourceDTO> getResources() {
+    public List<ResourceDTO> getResources(
+            @RequestParam(value = "tags[]", required = false) String[] tagNames
+    ) {
         return resourceService
             .listAllResources()
             .stream()

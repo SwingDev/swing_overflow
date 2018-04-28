@@ -12,5 +12,11 @@ spring:
       password: ${NEO4J_PASSWORD}
       uri: bolt://neo4j
 
+auth0:
+  audience: swingoverflow.io
+  issuer: https://dawiddominiak.eu.auth0.com/
+  client_id: client-id-to-be-overridden
+  client_secret: client-secret-to-be-overridden
+
 rtmUrl: https://slack.com/api/rtm.start?token={token}&simple_latest&no_unreads
 slackBotToken: ${SLACK_BOT_TOKEN}

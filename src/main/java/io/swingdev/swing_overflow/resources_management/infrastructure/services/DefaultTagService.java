@@ -25,4 +25,9 @@ public class DefaultTagService implements TagService {
     public Tag findByName(String name) {
         return tagRepository.findByName(name);
     }
+
+    @Override
+    public List<Tag> findTagsByNames(List<String> names) {
+        return tagRepository.findTagsByNameIn(names);
+    }
 }

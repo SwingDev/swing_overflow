@@ -46,4 +46,8 @@ public class Resource {
     public void addReaction(Reaction reaction) {
         reactions.add(reaction);
     }
+
+    public int score() {
+        return reactions.size();
+    }
 }

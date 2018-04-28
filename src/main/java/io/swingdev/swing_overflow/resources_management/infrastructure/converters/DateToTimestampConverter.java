@@ -1,4 +1,5 @@
-package io.swingdev.swing_overflow.resources_management.infrastructure.mappers;
+package io.swingdev.swing_overflow.resources_management.infrastructure.converters;
+
 
 import org.dozer.DozerConverter;
 

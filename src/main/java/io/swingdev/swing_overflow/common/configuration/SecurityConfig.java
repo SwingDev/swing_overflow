@@ -1,8 +1,8 @@
 package io.swingdev.swing_overflow.common.configuration;
 
 import com.auth0.spring.security.api.JwtWebSecurityConfigurer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -11,8 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private String audience = "swingoverflow.io";
-    private String issuer = "https://dawiddominiak.eu.auth0.com/";
+    @Value("${auth0.audience}")
+    private String audience;
+
+    @Value("${auth0.issuer}")
+    private String issuer;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -20,8 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .forRS256(audience, issuer)
             .configure(http)
             .authorizeRequests()
-            .antMatchers("/resources/**").authenticated()
-            .antMatchers("/tags/**").authenticated()
             .antMatchers("/users/**").authenticated();
     }
 }

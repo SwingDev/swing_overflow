@@ -1,21 +1,14 @@
-package io.swingdev.swing_overflow.user_management.api.fixtures;
+package io.swingdev.swing_overflow.user_management.fixtures;
 
 import com.google.common.collect.ImmutableList;
-import io.swingdev.swing_overflow.resources_management.domain.Message;
-import io.swingdev.swing_overflow.resources_management.domain.Resource;
-import io.swingdev.swing_overflow.resources_management.domain.Tag;
-import io.swingdev.swing_overflow.resources_management.domain.repositories.MessageRepository;
-import io.swingdev.swing_overflow.resources_management.domain.repositories.ResourceRepository;
-import io.swingdev.swing_overflow.resources_management.domain.repositories.TagRepository;
-import io.swingdev.swing_overflow.user_management.api.domain.User;
-import io.swingdev.swing_overflow.user_management.api.domain.repositories.UserRepository;
+import io.swingdev.swing_overflow.user_management.domain.User;
+import io.swingdev.swing_overflow.user_management.domain.repositories.UserRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 @Component
