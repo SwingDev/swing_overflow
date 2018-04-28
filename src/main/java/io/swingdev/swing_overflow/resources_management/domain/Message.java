@@ -36,11 +36,7 @@ public class Message {
         return text;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void changeDate(Date date) {
-        this.date = date;
+    public void pinResource(Resource resource) {
+        this.resource = resource;
     }
 }

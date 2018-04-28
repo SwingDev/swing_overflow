@@ -42,4 +42,12 @@
             <b>user</b>
         </field>
     </mapping>
+    <mapping>
+        <class-a>me.ramswaroop.jbot.core.slack.models.Event</class-a>
+        <class-b>io.swingdev.swing_overflow.resources_management.api.dto.MessageDTO</class-b>
+        <field>
+            <a>userId</a>
+            <b>user</b>
+        </field>
+    </mapping>
 </mappings>

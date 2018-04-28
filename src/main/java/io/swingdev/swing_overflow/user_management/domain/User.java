@@ -1,10 +1,7 @@
 package io.swingdev.swing_overflow.user_management.domain;
 
 import io.swingdev.swing_overflow.resources_management.domain.Reaction;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.*;
 
 import java.util.List;
 
@@ -13,6 +10,9 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Index(unique = true)
+    private String externalId;
 
     private String name;
 
