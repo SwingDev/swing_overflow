@@ -35,6 +35,10 @@
         <class-b>io.swingdev.swing_overflow.user_management.api.dto.UserDTO</class-b>
     </mapping>
     <mapping>
+        <class-a>io.swingdev.swing_overflow.user_management.api.dto.UserDTO</class-a>
+        <class-b is-accessible="true">io.swingdev.swing_overflow.user_management.domain.UserDetails</class-b>
+    </mapping>
+    <mapping>
         <class-a is-accessible="true">io.swingdev.swing_overflow.resources_management.domain.Reaction</class-a>
         <class-b>io.swingdev.swing_overflow.resources_management.api.dto.ReactionDTO</class-b>
         <field>
