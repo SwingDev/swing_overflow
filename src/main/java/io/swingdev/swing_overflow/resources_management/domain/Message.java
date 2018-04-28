@@ -1,9 +1,6 @@
 package io.swingdev.swing_overflow.resources_management.domain;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.*;
 
 import java.util.Date;
 
@@ -14,22 +11,18 @@ public class Message {
     private Long id;
 
     private String text;
-    private Date date;
+
+    @Index(unique = true)
+    private String timestamp;
 
     @Relationship(type = "HAS", direction = Relationship.UNDIRECTED)
     private Resource resource;
 
     private Message() { }
 
-    public Message(String text, Date date) {
+    public Message(String text, String timestamp) {
         this.text = text;
-        this.date = date;
-    }
-
-    public Message(String text, Date date, Resource resource) {
-        this.text = text;
-        this.date = date;
-        this.resource = resource;
+        this.timestamp = timestamp;
     }
 
     public String getText() {

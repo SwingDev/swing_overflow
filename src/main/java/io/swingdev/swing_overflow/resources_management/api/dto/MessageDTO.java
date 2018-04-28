@@ -4,6 +4,7 @@ public class MessageDTO {
     private String user;
     private String type;
     private String text;
+    private String channelId;
     private String ts;
 
     public String getType() {

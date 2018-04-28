@@ -5,8 +5,8 @@
     <mapping>
         <class-a is-accessible="true">io.swingdev.swing_overflow.resources_management.domain.Message</class-a>
         <class-b>io.swingdev.swing_overflow.resources_management.api.dto.MessageDTO</class-b>
-        <field custom-converter="io.swingdev.swing_overflow.resources_management.infrastructure.converters.DateToTimestampConverter">
-            <a>date</a>
+        <field>
+            <a>timestamp</a>
             <b>ts</b>
         </field>
     </mapping>

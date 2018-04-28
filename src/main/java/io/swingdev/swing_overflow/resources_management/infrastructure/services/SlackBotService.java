@@ -3,6 +3,7 @@ package io.swingdev.swing_overflow.resources_management.infrastructure.services;
 import io.swingdev.swing_overflow.resources_management.api.dto.MessageDTO;
 import io.swingdev.swing_overflow.resources_management.domain.Message;
 import io.swingdev.swing_overflow.resources_management.domain.Resource;
+import io.swingdev.swing_overflow.resources_management.domain.services.MessageService;
 import io.swingdev.swing_overflow.resources_management.domain.services.ResourceService;
 import me.ramswaroop.jbot.core.common.Controller;
 import me.ramswaroop.jbot.core.common.EventType;
@@ -21,11 +22,18 @@ public class SlackBotService extends Bot {
     private String slackToken;
     private Mapper mapper;
     private ResourceService resourceService;
+    private MessageService messageService;
 
-    public SlackBotService(@Value("${slackBotToken}") String slackToken, Mapper mapper, ResourceService resourceService) {
+    public SlackBotService(
+        @Value("${slackBotToken}") String slackToken,
+        Mapper mapper,
+        ResourceService resourceService,
+        MessageService messageService
+    ) {
         this.slackToken = slackToken;
         this.mapper = mapper;
         this.resourceService = resourceService;
+        this.messageService = messageService;
     }
 
     @Override
@@ -45,7 +53,7 @@ public class SlackBotService extends Bot {
         //TODO pin Dozer to Spring Hibernate
         Message message = new Message(
                 messageDto.getText(),
-                mapper.map(messageDto.getTs(), Date.class)
+                messageDto.getTs()
         );
 
         Resource resource = resourceService.createResourceByMessage(message);
@@ -53,6 +61,17 @@ public class SlackBotService extends Bot {
         resourceService.save(resource);
 
         reply(session, event, "Resource stored in database under ID " + resource.id());
+    }
+
+    @Controller(events = {EventType.REACTION_ADDED})
+    public void onReactionAdd(WebSocketSession session, Event event) {
+        String timestamp = event.getItem().getTs();
+
+        Message message = messageService.findByTimestamp(timestamp);
+
+        if (message != null) {
+
+        }
     }
 }
 

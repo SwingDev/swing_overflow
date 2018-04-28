@@ -42,7 +42,7 @@ task showJarLocations {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile("org.springframework.boot:spring-boot-devtools")
+//    compile("org.springframework.boot:spring-boot-devtools")
     compile('me.ramswaroop.jbot:jbot:4.0.1')
     compile('com.fasterxml.jackson.core:jackson-databind')
     compile('com.google.guava:guava:24.1-jre')
