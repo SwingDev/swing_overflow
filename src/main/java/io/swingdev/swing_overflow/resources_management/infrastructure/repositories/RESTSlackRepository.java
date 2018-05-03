@@ -23,47 +23,30 @@ import java.util.stream.Collectors;
 public class RESTSlackRepository implements SlackRepository {
 
     private RestTemplate restTemplate;
+    private UriComponentsBuilder uriComponentsBuilder;
     private Mapper mapper;
     private String slackToken;
 
     public RESTSlackRepository(@Value("${slackBotToken}") String slackToken, Mapper mapper) {
         this.mapper = mapper;
         this.slackToken = slackToken;
-        //TODO throw not needed stuff, simplify it
-        String slackUrl = "https://slack.com";
-        DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory(slackUrl);
-        RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
-        restTemplateBuilder.uriTemplateHandler(defaultUriBuilderFactory);
-        restTemplateBuilder.rootUri(slackUrl + "/api");
-        restTemplate = restTemplateBuilder.build();
-        restTemplate.setDefaultUriVariables(ImmutableMap.of("token", slackToken));
+        restTemplate = new RestTemplate();
+        uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl("https://slack.com/api/");
+        uriComponentsBuilder.queryParam("token", slackToken);
     }
 
     @Override
     public List<Message> getHistory(String channelName) {
-        HistoryDTO historyDTO = restTemplate.getForObject(
-            "/channels.history",
-            HistoryDTO.class,
-            ImmutableMap.of("channel", channelName)
-        );
-
-        if (historyDTO == null) {
-            return ImmutableList.of();
-        }
-
-        return historyDTO
-                .getMessages()
-                .stream()
-                .map(dto -> mapper.map(dto, Message.class))
-                .collect(Collectors.toList());
+        return null;
     }
 
     @Override
     public List<UserDetails> getUsers() {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://slack.com/api/users.list")
-                .queryParam("token", slackToken);
         UserListDTO userListDTO = restTemplate.getForObject(
-            builder.toUriString(),
+            uriComponentsBuilder
+                .cloneBuilder()
+                .pathSegment("users.list")
+                .toUriString(),
             UserListDTO.class
         );
 
